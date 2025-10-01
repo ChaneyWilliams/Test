@@ -33,25 +33,31 @@ public class Player : MonoBehaviour
     public float dashSpeed = 20.0f;
     public float dashDuration = 0.1f;
     public float dashCooldowon = 0.1f;
-    bool isDashing;
-    bool canDash = true;
-    TrailRenderer trailRenderer;
-
-
-
+    public bool isDashing;
+    public bool canDash = true;
+    [Header("Animations")]
+    bool isWalking;
+    public float speedRand = 2.0f;
+    float time = 0;
+    public float idleSpeed = 1.0f;
+    float idleIntensity = 0.01f;
+    public float wiggleSpeed = 2.0f;
+    public float wiggleAngle = 5.0f;
+    
+    [Header("Grabbed Components")]
+    [SerializeField] TrailRenderer trailRenderer;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     bool dead = false;
-    bool isWalking;
-    public float speedRand = 2.0f;
-    float time = 0;
-    public float frames = 1.0f;
+
+    private Coroutine walkWiggleCoroutine;
+    Vector3 defaultScale;
 
     void Start()
     {
-        trailRenderer = GetComponent<TrailRenderer>();
+        defaultScale = transform.localScale;
     }
     private void Update()
     {
@@ -123,12 +129,26 @@ public class Player : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
-        if (horizontal > 0 || horizontal < 0)
+        transform.localScale = defaultScale;
+
+        if (horizontal != 0)
         {
-            StartCoroutine(WalkAnim());
+            if (!isWalking)
+            {
+                isWalking = true;
+                walkWiggleCoroutine = StartCoroutine(WalkAnim());
+            }
         }
-
-
+        else
+        {
+            if (isWalking)
+            {
+                isWalking = false;
+                if (walkWiggleCoroutine != null)
+                    StopCoroutine(walkWiggleCoroutine);
+                transform.eulerAngles = Vector3.zero;
+            }
+        }
     }
     public void Dash(InputAction.CallbackContext context)
     {
@@ -154,16 +174,25 @@ public class Player : MonoBehaviour
     }
     IEnumerator WalkAnim()
     {
+        float t = 0f;
 
-        Quaternion rot = new Quaternion(0, 0, Mathf.Lerp(-5.0f, 5.0f, 0.0f), 0);
-        transform.rotation = rot;
-        yield return null;
+        while (isWalking)
+        {
+            // Wiggle back and forth around Z axis
+            float angle = Mathf.Sin(t * wiggleSpeed) * wiggleAngle;
+            transform.eulerAngles = new Vector3(0f, 0f, angle);
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        // Reset rotation when done
+        transform.eulerAngles = Vector3.zero;
     }
     void IdleAnim()
     {
-        time += Time.deltaTime * (1 - Random.Range(-speedRand, speedRand)) * Mathf.PI;
-        float fluct = transform.localScale.y + Mathf.Sin(time * frames) * 0.01f;
-        transform.localScale = new Vector2(transform.localScale.x, fluct);
+        time += Time.deltaTime * Mathf.PI * idleSpeed;
+        float fluct = defaultScale.y + Mathf.Sin(time) * idleIntensity; // oscillates around original y-scale
+        transform.localScale = new Vector3(defaultScale.x, fluct, defaultScale.z);
     }
     public void Attack(InputAction.CallbackContext context)
     {

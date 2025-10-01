@@ -682,11 +682,16 @@ MonoBehaviour:
   dashSpeed: 20
   dashDuration: 0.1
   dashCooldowon: 0.1
+  isDashing: 0
+  canDash: 1
+  speedRand: 2
+  idleSpeed: 1
+  wiggleSpeed: 10
+  wiggleAngle: 5
+  trailRenderer: {fileID: 5480063151226303359}
   spriteRenderer: {fileID: 2123999045633906546}
   rb: {fileID: 8623043067437729531}
   groundCheck: {fileID: 5721694233734583589}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  speedRand: 2
-  frames: 1
