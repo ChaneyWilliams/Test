@@ -16,9 +16,10 @@ public class Player : MonoBehaviour
 
 
     [Header("Movement")]
-    float horizontal;
+    public float horizontal;
     public float speed = 8f;
     bool isFacingRight;
+
     [Header("Jumping")]
     public float jumpingPower = 16f;
     public int numJumps = 2;
@@ -35,14 +36,15 @@ public class Player : MonoBehaviour
     public float dashCooldowon = 0.1f;
     public bool isDashing;
     public bool canDash = true;
+
     [Header("Animations")]
-    bool isWalking;
-    public float speedRand = 2.0f;
+    public bool isWalking;
     float time = 0;
     public float idleSpeed = 1.0f;
-    float idleIntensity = 0.01f;
+    public float idleIntensity = 0.01f;
     public float wiggleSpeed = 2.0f;
     public float wiggleAngle = 5.0f;
+
     
     [Header("Grabbed Components")]
     [SerializeField] TrailRenderer trailRenderer;
