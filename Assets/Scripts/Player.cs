@@ -7,6 +7,7 @@ using System.Collections;
 using UnityEditor.Callbacks;
 using System.Data.Common;
 using NUnit;
+using System.Threading;
 
 
 public class Player : MonoBehaviour
@@ -18,7 +19,6 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     public float horizontal;
     public float speed = 8f;
-    bool isFacingRight;
 
     [Header("Jumping")]
     public float jumpingPower = 16f;
@@ -44,15 +44,18 @@ public class Player : MonoBehaviour
     public float idleIntensity = 0.01f;
     public float wiggleSpeed = 2.0f;
     public float wiggleAngle = 5.0f;
+    public float attackCooldown = 0.5f;
 
-    
+
     [Header("Grabbed Components")]
+    [SerializeField] Animator animator;
     [SerializeField] TrailRenderer trailRenderer;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     bool dead = false;
+    
 
     private Coroutine walkWiggleCoroutine;
     Vector3 defaultScale;
@@ -112,13 +115,11 @@ public class Player : MonoBehaviour
     {
         if (horizontal < 0f)
         {
-            isFacingRight = false;
-            spriteRenderer.flipX = true;
+            animator.SetBool("FacingRight", false);
         }
         else if (horizontal > 0f)
         {
-            isFacingRight = true;
-            spriteRenderer.flipX = false;
+            animator.SetBool("FacingRight", true);
         }
     }
     public void Death()
@@ -165,7 +166,7 @@ public class Player : MonoBehaviour
         isDashing = true;
 
         trailRenderer.emitting = true;
-        float dashDirection = isFacingRight ? 1f : -1f;
+        float dashDirection = animator.GetBool("FacingRight") ? 1f : -1f;
         rb.linearVelocity = new Vector2(dashSpeed * dashDirection, rb.linearVelocity.y);
         yield return new WaitForSeconds(dashDuration);
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
@@ -198,7 +199,19 @@ public class Player : MonoBehaviour
     }
     public void Attack(InputAction.CallbackContext context)
     {
+        if (context.performed)
+        {
+            animator.SetBool("DonePlaying", false);
+            StartCoroutine(AttackTimer());
+        }
 
+    }
+    IEnumerator AttackTimer()
+    {
+        animator.SetTrigger("Attack");
+        yield return new WaitForSeconds(attackCooldown);
+        animator.ResetTrigger("Attack");
+        animator.SetBool("DonePlaying", true);
     }
     public void Jump(InputAction.CallbackContext context)
     {
