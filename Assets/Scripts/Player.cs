@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEditor.Callbacks;
 using System.Data.Common;
+using NUnit;
 
 
 public class Player : MonoBehaviour
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour
     bool isDashing;
     bool canDash = true;
     TrailRenderer trailRenderer;
-    Animator animator;
+
 
 
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -44,11 +45,13 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     bool dead = false;
     bool isWalking;
+    public float speedRand = 2.0f;
+    float time = 0;
+    public float frames = 1.0f;
 
     void Start()
     {
         trailRenderer = GetComponent<TrailRenderer>();
-        animator = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -77,6 +80,15 @@ public class Player : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.gravityScale = 0;
         }
+        if (horizontal == 0)
+        {
+            IdleAnim();
+        }
+        else
+        {
+            transform.localScale = new Vector2(1, 1);
+        }
+
     }
 
 
@@ -113,11 +125,7 @@ public class Player : MonoBehaviour
         horizontal = context.ReadValue<Vector2>().x;
         if (horizontal > 0 || horizontal < 0)
         {
-            isWalking = true;
-        }
-        else
-        {
-            isWalking = false;
+            StartCoroutine(WalkAnim());
         }
 
 
@@ -146,15 +154,20 @@ public class Player : MonoBehaviour
     }
     IEnumerator WalkAnim()
     {
-        
+
+        Quaternion rot = new Quaternion(0, 0, Mathf.Lerp(-5.0f, 5.0f, 0.0f), 0);
+        transform.rotation = rot;
+        yield return null;
+    }
+    void IdleAnim()
+    {
+        time += Time.deltaTime * (1 - Random.Range(-speedRand, speedRand)) * Mathf.PI;
+        float fluct = transform.localScale.y + Mathf.Sin(time * frames) * 0.01f;
+        transform.localScale = new Vector2(transform.localScale.x, fluct);
     }
     public void Attack(InputAction.CallbackContext context)
     {
-        int attackNum = 0;
-        if (context.performed && attackNum == 0)
-        {
-            animator.SetTrigger("Attack");
-        }
+
     }
     public void Jump(InputAction.CallbackContext context)
     {

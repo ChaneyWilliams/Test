@@ -264,7 +264,6 @@ GameObject:
   - component: {fileID: 4660319580806782904}
   - component: {fileID: 2123999045633906546}
   - component: {fileID: 5508718949185815643}
-  - component: {fileID: 4815228860463608763}
   - component: {fileID: 8623043067437729531}
   - component: {fileID: 9086403191767645643}
   - component: {fileID: 5480063151226303359}
@@ -490,28 +489,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!95 &4815228860463608763
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9176201423510667285}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 20d6b1b6161a1ab4d8fee72176c8608a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &8623043067437729531
 Rigidbody2D:
   serializedVersion: 5
@@ -711,3 +688,5 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  speedRand: 2
+  frames: 1
