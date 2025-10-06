@@ -8,11 +8,13 @@ using UnityEditor.Callbacks;
 using System.Data.Common;
 using NUnit;
 using System.Threading;
+using System.ComponentModel;
 
 
 public class Player : MonoBehaviour
 {
     public Color color;
+    public static Player instance;
 
 
 
@@ -45,10 +47,11 @@ public class Player : MonoBehaviour
     public float wiggleSpeed = 2.0f;
     public float wiggleAngle = 5.0f;
     public float attackCooldown = 0.5f;
+    public bool isAttacking;
 
 
     [Header("Grabbed Components")]
-    [SerializeField] Animator animator;
+    [SerializeField] public Animator animator;
     [SerializeField] TrailRenderer trailRenderer;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Rigidbody2D rb;
@@ -59,6 +62,18 @@ public class Player : MonoBehaviour
 
     private Coroutine walkWiggleCoroutine;
     Vector3 defaultScale;
+    void Awake()
+    {
+        if (instance != this)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.Log("there was a clone");
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -199,19 +214,11 @@ public class Player : MonoBehaviour
     }
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !isAttacking)
         {
-            animator.SetTrigger("AttackOne");
-            //StartCoroutine(AttackTimer());
+            isAttacking = true;
         }
 
-    }
-    IEnumerator AttackTimer()
-    {
-        animator.SetTrigger("Attack");
-        yield return new WaitForSeconds(attackCooldown);
-        animator.ResetTrigger("Attack");
-        animator.SetBool("DonePlaying", true);
     }
     public void Jump(InputAction.CallbackContext context)
     {
