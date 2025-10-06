@@ -201,8 +201,8 @@ public class Player : MonoBehaviour
     {
         if (context.performed)
         {
-            animator.SetBool("DonePlaying", false);
-            StartCoroutine(AttackTimer());
+            animator.SetTrigger("AttackOne");
+            //StartCoroutine(AttackTimer());
         }
 
     }
