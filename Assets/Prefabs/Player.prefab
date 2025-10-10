@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 960382389965474685}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -773,7 +773,9 @@ MonoBehaviour:
   wiggleSpeed: 10
   wiggleAngle: 5
   attackCooldown: 0.2
+  facingRight: 0
   isAttacking: 0
+  flipping: 0
   animator: {fileID: 8891135753068750275}
   trailRenderer: {fileID: 5480063151226303359}
   spriteRenderer: {fileID: 2123999045633906546}
