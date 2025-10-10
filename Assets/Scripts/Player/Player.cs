@@ -47,7 +47,9 @@ public class Player : MonoBehaviour
     public float wiggleSpeed = 2.0f;
     public float wiggleAngle = 5.0f;
     public float attackCooldown = 0.5f;
+    public bool facingRight;
     public bool isAttacking;
+    public bool flipping;
 
 
     [Header("Grabbed Components")]
@@ -58,7 +60,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     bool dead = false;
-    
+
 
     private Coroutine walkWiggleCoroutine;
     Vector3 defaultScale;
@@ -130,11 +132,11 @@ public class Player : MonoBehaviour
     {
         if (horizontal < 0f)
         {
-            animator.SetBool("FacingRight", false);
+            facingRight = false;
         }
         else if (horizontal > 0f)
         {
-            animator.SetBool("FacingRight", true);
+            facingRight = true;
         }
     }
     public void Death()
@@ -151,7 +153,7 @@ public class Player : MonoBehaviour
 
         if (horizontal != 0)
         {
-            if (!isWalking)
+            if (!isWalking && !flipping)
             {
                 isWalking = true;
                 walkWiggleCoroutine = StartCoroutine(WalkAnim());
@@ -159,7 +161,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (isWalking)
+            if (isWalking && !flipping)
             {
                 isWalking = false;
                 if (walkWiggleCoroutine != null)
@@ -189,6 +191,27 @@ public class Player : MonoBehaviour
         trailRenderer.emitting = false;
         yield return new WaitForSeconds(dashCooldowon);
 
+    }
+    IEnumerator CoolFlip()
+    {
+        Debug.Log("FLippin");
+        float a = 0.0f;
+        while (a <= 345 && a >= -345)
+        {
+            flipping = true;
+            if (facingRight)
+            {
+                a -= 15.0f;
+            }
+            else
+            {
+                a += 15.0f;
+            }
+            transform.eulerAngles = new Vector3(0f, 0f, a);
+            yield return null;
+        }
+        a = 0.0f;
+        flipping = false;
     }
     IEnumerator WalkAnim()
     {
@@ -228,6 +251,10 @@ public class Player : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
                 jumpsRemaining--;
+                if (jumpsRemaining == 0)
+                {
+                    StartCoroutine(CoolFlip());
+                }
             }
             else if (context.canceled)
             {

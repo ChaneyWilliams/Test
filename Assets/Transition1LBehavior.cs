@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TransitionTwoBehavior : StateMachineBehaviour
+public class Transition1LBehavior : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -10,9 +10,10 @@ public class TransitionTwoBehavior : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Player.instance.isAttacking && Player.instance.facingRight)
+        if (Player.instance.isAttacking && !Player.instance.facingRight)
         {
-            Player.instance.animator.Play("AttackThree");
+            Player.instance.animator.Play("Attack2L");
+
         }
     }
 
@@ -21,7 +22,6 @@ public class TransitionTwoBehavior : StateMachineBehaviour
     {
         Player.instance.isAttacking = false;
     }
-
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
