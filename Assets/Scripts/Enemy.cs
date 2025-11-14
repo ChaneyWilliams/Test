@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float health = 10;
     public float speed = 10.0f;
     public Transform player;
+    public ParticleSystem particle;
     void FixedUpdate()
     {
         if (health <= 0)
@@ -24,5 +25,17 @@ public class Enemy : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * speed);
             }
         }
+    }
+    public void StartAttackSFX()
+    {
+        particle.gameObject.SetActive(true);
+        particle.Play();
+        Debug.Log("start");
+    }
+    public void EndAttackSFX()
+    {
+        Debug.Log("stop");
+        particle.Stop();
+        particle.gameObject.SetActive(false);
     }
 }

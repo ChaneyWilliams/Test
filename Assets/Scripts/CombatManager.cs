@@ -15,7 +15,7 @@ public class CombatManager : MonoBehaviour
     }
     public void Hit(Vector3 sender, float strength, Rigidbody2D recieverRB2D)
     {
-
+        if(recieverRB2D.CompareTag("Player") && Player.instance.isParrying) Debug.Log("GEt FUCKED");
         Debug.Log("HIT");
         StopAllCoroutines();
 
