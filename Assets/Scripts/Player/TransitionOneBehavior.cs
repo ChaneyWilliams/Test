@@ -16,6 +16,10 @@ public class TransitionOneBehavior : StateMachineBehaviour
             Player.instance.animator.Play("AttackTwo");
 
         }
+        if (Player.instance.isParrying)
+        {
+            Player.instance.animator.Play("Guard");
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

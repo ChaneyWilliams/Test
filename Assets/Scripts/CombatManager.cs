@@ -21,7 +21,6 @@ public class CombatManager : MonoBehaviour
 
         Vector2 direction = -(transform.position - sender).normalized;
         recieverRB2D.AddForceX(direction.x * strength, ForceMode2D.Impulse);
-        if (recieverRB2D == null) return;
         StartCoroutine(ResetVelocity(recieverRB2D, 0.5f));
     }
     IEnumerator ResetVelocity(Rigidbody2D rigid, float delay)
@@ -31,7 +30,7 @@ public class CombatManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         if (rigid == null) yield break;
-        
+
         rigid.linearVelocity = Vector3.zero;
     }
 }

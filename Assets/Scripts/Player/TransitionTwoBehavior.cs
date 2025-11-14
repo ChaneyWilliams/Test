@@ -14,6 +14,10 @@ public class TransitionTwoBehavior : StateMachineBehaviour
         {
             Player.instance.animator.Play("AttackThree");
         }
+        if (Player.instance.isParrying)
+        {
+            Player.instance.animator.Play("Guard");
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -54,6 +54,10 @@ public class Player : MonoBehaviour
     public bool facingRight;
     public bool isAttacking;
     public bool flipping;
+    
+    [Header("Parry")]
+    public float parryWindow = 0.1f;
+    public bool isParrying;
 
     [Header("Grabbed Components")]
     [SerializeField] public Animator animator;
@@ -63,7 +67,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     bool dead = false;
-
 
     private Coroutine walkWiggleCoroutine;
     Vector3 defaultScale;
@@ -228,6 +231,19 @@ public class Player : MonoBehaviour
             isAttacking = true;
         }
 
+    }
+    public void Guard(InputAction.CallbackContext context)
+    {
+        if (context.performed && !isAttacking)
+        {
+            StartCoroutine(Parry());
+        }
+    }
+    IEnumerator Parry()
+    {
+        isParrying = true;
+        yield return new WaitForSeconds(parryWindow);
+        isParrying = false;
     }
     public void Jump(InputAction.CallbackContext context)
     {
