@@ -366,6 +366,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de917ed610f14fe4c9daa1cb1788e353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1121532982 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4660319580806782904, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
+  m_PrefabInstance: {fileID: 4334968445467636894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1238578656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -378,6 +383,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2493027100605116978, guid: 1d7824e36b529384faef8c133652c892, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1121532982}
     - target: {fileID: 4908727208682149193, guid: 1d7824e36b529384faef8c133652c892, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5565534
@@ -532,6 +541,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5480063151226303359, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480063151226303359, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5508718949185815643, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -559,6 +576,18 @@ PrefabInstance:
     - target: {fileID: 5508718949185815643, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644185973044936817, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604376647186492482, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604376647186492482, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
+      propertyPath: strength
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9176201423510667285, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
       propertyPath: m_Name

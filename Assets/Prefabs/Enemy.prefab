@@ -158,11 +158,11 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2493027100605116978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,3 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8da0eb811448d468c328f6f50a64ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb2d: {fileID: 5609650370232394953}
+  delay: 0.15
+  health: 10
+  speed: 5
+  player: {fileID: 0}
