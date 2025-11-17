@@ -30,11 +30,11 @@ public class Enemy : MonoBehaviour
     {
         particle.gameObject.SetActive(true);
         particle.Play();
-        Debug.Log("start");
+
     }
     public void EndAttackSFX()
     {
-        Debug.Log("stop");
+
         particle.Stop();
         particle.gameObject.SetActive(false);
     }

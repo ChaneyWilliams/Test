@@ -6,11 +6,20 @@ public class Sword : MonoBehaviour
     public int damage = 5;
     public float strength = 5;
     void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Enemy"))
     {
-        if (collision.gameObject.CompareTag("Enemy") && collision != null)
-        {
-            collision.GetComponent<Enemy>().health -= damage;
-            CombatManager.instance.Hit(transform.position, strength, collision.gameObject.GetComponent<Rigidbody2D>());
-        }
+        Debug.Log("ReKt");
+        var rb = collision.attachedRigidbody;
+        collision.GetComponent<Enemy>().health -= damage;
+        CombatManager.instance.Hit(transform.position, strength, rb);
     }
+
+    if (collision.CompareTag("Player"))
+    {
+        var rb = collision.attachedRigidbody;
+        CombatManager.instance.Hit(transform.position, strength, rb);
+    }
+}
+
 }
