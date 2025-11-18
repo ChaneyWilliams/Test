@@ -67,6 +67,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     bool dead = false;
+    public int health;
+    SpriteFlasher spriteFlasher;
 
     private Coroutine walkWiggleCoroutine;
     Vector3 defaultScale;
@@ -82,6 +84,7 @@ public class Player : MonoBehaviour
             Debug.Log("there was a clone");
             Destroy(gameObject);
         }
+        spriteFlasher = GetComponent<SpriteFlasher>();
     }
     // grabbing the normal size so the coded animations dont break the scale
     void Start()
@@ -95,7 +98,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+        //rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
 
         Gravity();
         GroundCheck();
@@ -112,7 +115,7 @@ public class Player : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.gravityScale = 0;
         }
-        else
+        else if(!spriteFlasher.hit)
         {
             rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
         }

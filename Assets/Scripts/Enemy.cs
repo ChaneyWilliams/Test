@@ -9,7 +9,12 @@ public class Enemy : MonoBehaviour
     public float health = 10;
     public float speed = 10.0f;
     public Transform player;
-    public ParticleSystem particle;
+    public bool hit = false;
+    SpriteFlasher spriteFlasher;
+    void Start()
+    {
+        spriteFlasher = GetComponent<SpriteFlasher>();
+    }
     void FixedUpdate()
     {
         if (health <= 0)
@@ -19,22 +24,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (Vector3.SqrMagnitude(transform.position - player.position) > 10.0f)
+            if (Vector3.SqrMagnitude(transform.position - player.position) > 20.0f && !spriteFlasher.hit)
             {
                 transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * speed);
             }
         }
-    }
-    public void StartAttackSFX()
-    {
-        particle.gameObject.SetActive(true);
-        particle.Play();
-
-    }
-    public void EndAttackSFX()
-    {
-
-        particle.Stop();
-        particle.gameObject.SetActive(false);
     }
 }

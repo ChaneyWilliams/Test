@@ -7,8 +7,11 @@ public class Sword : MonoBehaviour
     public float strength = 5;
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Rigidbody2D rb = collision.attachedRigidbody;
-        CombatManager.instance.Hit(transform.position, strength, rb);
+        if ((collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy")) && !collision.gameObject.GetComponent<SpriteFlasher>().isFlashing)
+        {
+            CombatManager.instance.Hit(transform.position, strength, damage, collision.gameObject);
+        }
+
     }
 
 }

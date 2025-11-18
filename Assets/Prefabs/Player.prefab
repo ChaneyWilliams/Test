@@ -136,7 +136,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 960382389965474685}
   - component: {fileID: 6401973484083494504}
   - component: {fileID: 1603240716290894756}
+  - component: {fileID: 4141991032985090525}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -699,6 +700,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &4141991032985090525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176201423510667285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2773a9c79266274c9ff9234146d7055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit: 0
+  isFlashing: 0
 --- !u!1001 &1782116928592034578
 PrefabInstance:
   m_ObjectHideFlags: 0
