@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb2d;
-    public float delay = 0.15f;
     public float health = 10;
     public float speed = 10.0f;
     public Transform player;

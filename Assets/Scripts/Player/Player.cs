@@ -278,7 +278,7 @@ public class Player : MonoBehaviour
             a += flipDireciton;
             flipping = true;
             transform.eulerAngles = new Vector3(0f, 0f, a);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         flipping = false;
     }

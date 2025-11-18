@@ -15,8 +15,12 @@ public class CombatManager : MonoBehaviour
     }
     public void Hit(Vector3 sender, float strength, Rigidbody2D recieverRB2D)
     {
-        if(recieverRB2D.CompareTag("Player") && Player.instance.isParrying) Debug.Log("GEt FUCKED");
-        Debug.Log("HIT");
+        if (recieverRB2D.gameObject.CompareTag("Player") && Player.instance.isParrying)
+        {
+            Debug.Log("Parry");
+            return;
+        }
+        Debug.Log("HIT!");
         StopAllCoroutines();
 
         Vector2 direction = -(transform.position - sender).normalized;
@@ -26,7 +30,7 @@ public class CombatManager : MonoBehaviour
     IEnumerator ResetVelocity(Rigidbody2D rigid, float delay)
     {
 
-        Debug.Log("Reset");
+        //Debug.Log("Reset");
         yield return new WaitForSeconds(delay);
 
         if (rigid == null) yield break;
