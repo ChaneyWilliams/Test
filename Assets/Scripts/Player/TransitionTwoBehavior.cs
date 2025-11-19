@@ -10,7 +10,7 @@ public class TransitionTwoBehavior : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Player.instance.isAttacking && Player.instance.facingRight)
+        if (Player.instance.isAttacking)
         {
             Player.instance.animator.Play("AttackThree");
         }

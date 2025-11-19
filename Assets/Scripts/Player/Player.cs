@@ -9,6 +9,8 @@ using System.Data.Common;
 using NUnit;
 using System.Threading;
 using System.ComponentModel;
+using TMPro;
+using Unity.Mathematics;
 
 
 public class Player : MonoBehaviour
@@ -145,13 +147,24 @@ public class Player : MonoBehaviour
     // tells if facing right
     private void Flip()
     {
-        if (horizontal < 0f)
-        {
-            facingRight = false;
-        }
-        else if (horizontal > 0f)
+        if (horizontal > 0f)
         {
             facingRight = true;
+            if(defaultScale.x < 0)
+            {
+                defaultScale = new Vector3(Mathf.Abs(defaultScale.x), defaultScale.y, defaultScale.z);
+            }
+            
+            transform.localScale = new Vector3(defaultScale.x, 1.0f, 1.0f);
+        }
+        else if (horizontal < 0f)
+        {
+            facingRight = false;
+            if(defaultScale.x > 0)
+            {
+                defaultScale = new Vector3(-defaultScale.x, defaultScale.y, defaultScale.z);
+            }
+            transform.localScale = new Vector3(defaultScale.x, 1.0f, 1.0f);
         }
     }
     public void Death()
