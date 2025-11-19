@@ -30,4 +30,12 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    public void AttackSFXStart()
+    {
+        SoundEfffectManager.Play("MicroWave", 0);
+    }
+    public void AttackWoosh()
+    {
+        SoundEfffectManager.Play("Woosh", 0);
+    }
 }

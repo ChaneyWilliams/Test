@@ -66,6 +66,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private Collider2D collider2d;
     bool dead = false;
     public int health;
     SpriteFlasher spriteFlasher;
@@ -207,12 +209,13 @@ public class Player : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-
+        collider2d.excludeLayers = enemyLayer;
         trailRenderer.emitting = true;
         float dashDirection = facingRight ? 1f : -1f;
         // dash forward based on where theyre facing for however long dash duration lasts
         rb.linearVelocity = new Vector2(dashSpeed * dashDirection, rb.linearVelocity.y);
         yield return new WaitForSeconds(dashDuration);
+        collider2d.excludeLayers = 0;
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
         isDashing = false;
         trailRenderer.emitting = false;

@@ -632,7 +632,7 @@ MonoBehaviour:
   facingRight: 0
   isAttacking: 0
   flipping: 0
-  parryWindow: 0.1
+  parryWindow: 0.15
   isParrying: 0
   animator: {fileID: 8891135753068750275}
   trailRenderer: {fileID: 5480063151226303359}
@@ -642,6 +642,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  collider2d: {fileID: 1603240716290894756}
+  health: 0
 --- !u!114 &6401973484083494504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,6 +659,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ac93a35fb6e6948ae3b25c47949fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parryCount: 0
+  hitsToUpgradeParry: 3
+  flashDuration: 0
+  flashNum: 0
 --- !u!61 &1603240716290894756
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -760,6 +769,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2959727792656523033, guid: 814124cdd7a72e040aa2b58d004cec5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835788986257479504, guid: 814124cdd7a72e040aa2b58d004cec5f, type: 3}
+      propertyPath: strength
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6264354088719629155, guid: 814124cdd7a72e040aa2b58d004cec5f, type: 3}

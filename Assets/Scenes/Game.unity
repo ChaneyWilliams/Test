@@ -463,10 +463,19 @@ MonoBehaviour:
   soundEffectGroups:
   - name: Parry
     audioClip:
-    - {fileID: 8300000, guid: ff41feb549991a446a55552dbc2ee643, type: 3}
+    - {fileID: 8300000, guid: d9dc7f6b43c8b4848b7bbf2b55c9415c, type: 3}
+    - {fileID: 8300000, guid: 3a513b96307d17147a5a21e207ce3135, type: 3}
+    - {fileID: 8300000, guid: ce7391f74abe7d04eba9dfed704841cc, type: 3}
+    - {fileID: 8300000, guid: cbb11313895042f45842aa8028cdca1c, type: 3}
   - name: OOF
     audioClip:
     - {fileID: 8300000, guid: 52494e05ac6aad8459c60f0744891bfa, type: 3}
+  - name: MicroWave
+    audioClip:
+    - {fileID: 8300000, guid: 5ada03b8fa74f4f47890d434c5e52715, type: 3}
+  - name: Woosh
+    audioClip:
+    - {fileID: 8300000, guid: 7563f3f815e873f47ac13db68b619002, type: 3}
 --- !u!82 &857151496
 AudioSource:
   m_ObjectHideFlags: 0
@@ -725,6 +734,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2033742575290104459, guid: cd1d619d755742e4491a257a2159d16b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2829310951689013328, guid: cd1d619d755742e4491a257a2159d16b, type: 3}
       propertyPath: player
       value: 
@@ -798,10 +811,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 960382389965474685, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
-      propertyPath: parryWindow
-      value: 0.15
-      objectReference: {fileID: 0}
     - target: {fileID: 4660319580806782904, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.25
@@ -892,7 +901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6604376647186492482, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
       propertyPath: strength
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9176201423510667285, guid: 2070212fea69dbf4189e37861721f84d, type: 3}
       propertyPath: m_Name

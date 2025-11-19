@@ -7,6 +7,7 @@ public class SoundEffectLibrary : MonoBehaviour
     [SerializeField] private SoundEffectGroup[] soundEffectGroups;
 
     private Dictionary<string, List<AudioClip>> soundDictionary;
+    public static SoundEffectLibrary instance;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class SoundEffectLibrary : MonoBehaviour
             soundDictionary[soundEffectGroup.name] = soundEffectGroup.audioClip;
         }
     }
-    public AudioClip GetRandomClip(string name)
+    public AudioClip GetClip(string name, int index)
     {
         if (soundDictionary.ContainsKey(name))
         {
@@ -29,7 +30,7 @@ public class SoundEffectLibrary : MonoBehaviour
             List<AudioClip> audioClips = soundDictionary[name];
             if (audioClips.Count > 0)
             {
-                return audioClips[0];
+                return audioClips[index];
             }
 
         }

@@ -22,9 +22,9 @@ public class SoundEfffectManager : MonoBehaviour
     {
         //sfxSlider.onValueChanged.AddListener(delegate { OnValueChange(); });
     }
-    public static void Play(string audioName)
+    public static void Play(string audioName, int index)
     {
-        AudioClip audioClip = library.GetRandomClip(audioName);
+        AudioClip audioClip = library.GetClip(audioName, index);
         if (audioClip != null) 
         {
             audioSource.PlayOneShot(audioClip);
